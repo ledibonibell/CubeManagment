@@ -1,0 +1,6 @@
+<resources>
+    <dimen name="fab_margin">20dp</dimen>
+    <dimen name="fab_padding_bottom">88dp</dimen>
+    <dimen name="grid_spacing">8dp</dimen>
+    <dimen name="recycler_padding_top">35dp</dimen>
+</resources>

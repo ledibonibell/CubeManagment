@@ -18,11 +18,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // восстановление количества элементов
         val restored = savedInstanceState?.getInt(KEY_COUNT) ?: 0
         if (data.isEmpty() && restored > 0) repeat(restored) { data.add(it) }
 
         val span = if (resources.configuration.orientation ==
-            Configuration.ORIENTATION_PORTRAIT) 3 else 4
+            Configuration.ORIENTATION_PORTRAIT)
+            resources.getInteger(R.integer.span_portrait)
+        else
+            resources.getInteger(R.integer.span_landscape)
 
         val rv = findViewById<RecyclerView>(R.id.recyclerView)
         val lm = GridLayoutManager(this, span)
@@ -35,6 +39,7 @@ class MainActivity : AppCompatActivity() {
             data.add(data.size)
             adapter.notifyItemInserted(data.lastIndex)
 
+            // мягкая прокрутка к новому элементу
             val scroller = object : LinearSmoothScroller(this) {
                 override fun calculateSpeedPerPixel(dm: android.util.DisplayMetrics): Float {
                     return 150f / dm.densityDpi

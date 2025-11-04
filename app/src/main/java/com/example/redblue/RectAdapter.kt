@@ -21,7 +21,7 @@ class RectAdapter(private val items: List<Int>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val ctx = holder.itemView.context
-        val colorRes = if (position % 2 == 1)
+        val colorRes = if (position % 2 == 0)
             R.color.evenColor else R.color.oddColor
         holder.text.setBackgroundColor(ctx.getColor(colorRes))
         holder.text.text = (position + 1).toString()

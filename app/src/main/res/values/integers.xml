@@ -1,0 +1,4 @@
+<resources>
+    <integer name="span_portrait">3</integer>
+    <integer name="span_landscape">4</integer>
+</resources>

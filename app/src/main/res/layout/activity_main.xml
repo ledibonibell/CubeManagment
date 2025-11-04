@@ -9,17 +9,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
-        android:paddingBottom="88dp"
+        android:paddingTop="@dimen/recycler_padding_top"
+        android:paddingBottom="@dimen/fab_padding_bottom"
         android:scrollbars="vertical" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_margin="@dimen/fab_margin"
         android:contentDescription="@string/add"
         app:srcCompat="@android:drawable/ic_input_add"
-        app:layout_anchorGravity="bottom|end"
-        app:layout_anchor="@id/recyclerView" />
-
+        app:layout_anchor="@id/recyclerView"
+        app:layout_anchorGravity="bottom|end" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
