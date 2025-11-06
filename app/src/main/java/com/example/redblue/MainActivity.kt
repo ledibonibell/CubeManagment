@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
+    // список чисел для карточек
     private val data = mutableListOf<Int>()
     private lateinit var adapter: RectAdapter
 
@@ -18,37 +19,42 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // восстановление количества элементов
+        // восстановление количества карточек при повороте экрана
         val restored = savedInstanceState?.getInt(KEY_COUNT) ?: 0
         if (data.isEmpty() && restored > 0) repeat(restored) { data.add(it) }
 
+        // выбор количества колонок в зависимости от ориентации
         val span = if (resources.configuration.orientation ==
             Configuration.ORIENTATION_PORTRAIT)
             resources.getInteger(R.integer.span_portrait)
         else
             resources.getInteger(R.integer.span_landscape)
 
+        // настройка RecyclerView и адаптера
         val rv = findViewById<RecyclerView>(R.id.recyclerView)
         val lm = GridLayoutManager(this, span)
         rv.layoutManager = lm
         adapter = RectAdapter(data)
         rv.adapter = adapter
 
+        // кнопка добавления нового квадрата
         val fab = findViewById<FloatingActionButton>(R.id.addButton)
         fab.setOnClickListener {
+            // добавляем новый элемент в список
             data.add(data.size)
             adapter.notifyItemInserted(data.lastIndex)
 
-            // мягкая прокрутка к новому элементу
+            // плавно прокручиваем к последнему элементу
             val scroller = object : LinearSmoothScroller(this) {
                 override fun calculateSpeedPerPixel(dm: android.util.DisplayMetrics): Float {
-                    return 150f / dm.densityDpi
+                    return 150f / dm.densityDpi // чем больше число, тем медленнее прокрутка
                 }
             }
             scroller.targetPosition = data.lastIndex
             lm.startSmoothScroll(scroller)
         }
 
+        // показываем кнопку только в конце списка
         rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 val visible = lm.findLastCompletelyVisibleItemPosition()
@@ -57,6 +63,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    // сохраняем количество элементов при перевороте экрана
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putInt(KEY_COUNT, data.size)
         super.onSaveInstanceState(outState)

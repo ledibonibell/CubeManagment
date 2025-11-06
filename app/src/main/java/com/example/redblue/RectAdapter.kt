@@ -7,19 +7,23 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
+// адаптер для отображения квадратов в RecyclerView
 class RectAdapter(private val items: List<Int>) :
     RecyclerView.Adapter<RectAdapter.ViewHolder>() {
 
+    // держатель ссылки на TextView внутри карточки
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val text: TextView = view.findViewById(R.id.itemText)
     }
 
+    // создаёт макет элемента (item_rectangle.xml)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_rectangle, parent, false)
         return ViewHolder(view)
     }
 
+    // заполняет данные: номер и цвет карточки
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val ctx = holder.itemView.context
@@ -29,5 +33,6 @@ class RectAdapter(private val items: List<Int>) :
         holder.text.text = (position + 1).toString()
     }
 
+    // общее количество элементов в списке
     override fun getItemCount() = items.size
 }
