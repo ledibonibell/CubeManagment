@@ -1,5 +1,6 @@
 package com.example.redblue
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,9 +20,10 @@ class RectAdapter(private val items: List<Int>) :
         return ViewHolder(view)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val ctx = holder.itemView.context
-        val colorRes = if (position % 2 == 0)
+        val colorRes = if (position % 2 == 1)
             R.color.evenColor else R.color.oddColor
         holder.text.setBackgroundColor(ctx.getColor(colorRes))
         holder.text.text = (position + 1).toString()
