@@ -23,7 +23,7 @@ class RectAdapter(private val items: List<Int>) :
         return ViewHolder(view)
     }
 
-    // заполняет данные: номер и цвет карточки
+    // заполняет квадратики
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val ctx = holder.itemView.context

@@ -1,4 +1,5 @@
 <resources>
+    <color name="textColor">#FFFFFF</color>
+    <color name="oddColor">#0000FF</color>
     <color name="evenColor">#FF0000</color>
-    <color name="oddColor">#0000FF</color>=
 </resources>

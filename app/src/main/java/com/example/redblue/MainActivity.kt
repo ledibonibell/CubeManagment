@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
-    // список чисел для карточек
     private val data = mutableListOf<Int>()
     private lateinit var adapter: RectAdapter
 
@@ -40,21 +39,21 @@ class MainActivity : AppCompatActivity() {
         // кнопка добавления нового квадрата
         val fab = findViewById<FloatingActionButton>(R.id.addButton)
         fab.setOnClickListener {
-            // добавляем новый элемент в список
             data.add(data.size)
             adapter.notifyItemInserted(data.lastIndex)
 
             // плавно прокручиваем к последнему элементу
             val scroller = object : LinearSmoothScroller(this) {
                 override fun calculateSpeedPerPixel(dm: android.util.DisplayMetrics): Float {
-                    return 150f / dm.densityDpi // чем больше число, тем медленнее прокрутка
+                    // чем больше число, тем медленнее прокрутка, ага, не наоборот XD
+                    return 150f / dm.densityDpi
                 }
             }
             scroller.targetPosition = data.lastIndex
             lm.startSmoothScroll(scroller)
         }
 
-        // показываем кнопку только в конце списка
+        // показываем кнопку только внизу
         rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 val visible = lm.findLastCompletelyVisibleItemPosition()
