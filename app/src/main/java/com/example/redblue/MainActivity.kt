@@ -2,6 +2,7 @@ package com.example.redblue
 
 import android.content.res.Configuration
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearSmoothScroller
@@ -12,7 +13,9 @@ class MainActivity : AppCompatActivity() {
     private val data = mutableListOf<Int>()
     private lateinit var adapter: RectAdapter
 
-    private companion object { const val KEY_COUNT = "count" }
+    private companion object {
+        const val KEY_COUNT = "count"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +27,8 @@ class MainActivity : AppCompatActivity() {
 
         // выбор количества колонок в зависимости от ориентации
         val span = if (resources.configuration.orientation ==
-            Configuration.ORIENTATION_PORTRAIT)
+            Configuration.ORIENTATION_PORTRAIT
+        )
             resources.getInteger(R.integer.span_portrait)
         else
             resources.getInteger(R.integer.span_landscape)
@@ -40,6 +44,10 @@ class MainActivity : AppCompatActivity() {
         val fab = findViewById<FloatingActionButton>(R.id.addButton)
         fab.setOnClickListener {
             data.add(data.size)
+
+
+            Toast.makeText(this, "add ${data.lastIndex + 1}", Toast.LENGTH_SHORT).show()
+
             adapter.notifyItemInserted(data.lastIndex)
 
             // плавно прокручиваем к последнему элементу

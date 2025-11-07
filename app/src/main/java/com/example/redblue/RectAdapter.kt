@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 // адаптер для отображения квадратов в RecyclerView
-class RectAdapter(private val items: List<Int>) :
+class RectAdapter(private val items: MutableList<Int>) :
     RecyclerView.Adapter<RectAdapter.ViewHolder>() {
 
     // держатель ссылки на TextView внутри карточки
